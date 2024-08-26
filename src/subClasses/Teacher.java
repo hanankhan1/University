@@ -12,6 +12,7 @@ public class Teacher {
     private String epass;
     private String equestion;
     private String eanswer;
+    private Section sec;
 
     public Teacher(){}
 
@@ -22,16 +23,17 @@ public class Teacher {
         this.eanswer = eanswer;
     }
 
-    public Teacher(String tName, String tId, String salary, String deprt, String Address,String phoneNo) {
+    public Teacher(String tName, String tId, String salary, String deprt, String Address,String phoneNo,Section sec) {
         this.tName = tName;
         this.tId = tId;
         this.salary = salary;
         this.deprt = deprt;
         this.Address=Address;
         this.phoneNo = phoneNo;
+        this.sec = sec;
     }
-    
-    public Teacher(String tName, String tId, String salary, String deprt, String Address, String phoneNo, String epass, String equestion, String eanswer) {
+
+    public Teacher(String tName, String tId, String salary, String deprt, String Address, String phoneNo, String epass, String equestion, String eanswer, Section sec) {
         this.tName = tName;
         this.tId = tId;
         this.salary = salary;
@@ -41,7 +43,10 @@ public class Teacher {
         this.epass = epass;
         this.equestion = equestion;
         this.eanswer = eanswer;
+        this.sec = sec;
     }
+    
+    
 
     public String gettName() {
         return tName;

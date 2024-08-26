@@ -26,6 +26,9 @@ public class AdminDas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -34,8 +37,15 @@ public class AdminDas extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        courseManage = new javax.swing.JRadioButtonMenuItem();
+        back = new javax.swing.JMenuItem();
+        teacher = new javax.swing.JRadioButtonMenuItem();
+
+        jMenu1.setText("File");
+        jMenuBar2.add(jMenu1);
+
+        jMenu3.setText("Edit");
+        jMenuBar2.add(jMenu3);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,21 +74,31 @@ public class AdminDas extends javax.swing.JFrame {
 
         jMenu2.setText("Course");
 
-        jMenuItem2.setText("Back");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        courseManage.setSelected(true);
+        courseManage.setText("course manage");
+        courseManage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                courseManageActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem2);
+        jMenu2.add(courseManage);
 
-        jMenuItem1.setText("Course Manage");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        back.setText("Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                backActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem1);
+        jMenu2.add(back);
+
+        teacher.setSelected(true);
+        teacher.setText("Teacher");
+        teacher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                teacherActionPerformed(evt);
+            }
+        });
+        jMenu2.add(teacher);
 
         jMenuBar1.add(jMenu2);
 
@@ -99,23 +119,30 @@ public class AdminDas extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        this.dispose();
-        CourseManag c=new CourseManag();
-        c.setVisible(true);
-        
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
         this.dispose();
         MainDash m =new MainDash();
         m.setVisible(true);
         
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_backActionPerformed
+
+    private void courseManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_courseManageActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        this.dispose();
+        CourseManag c= new CourseManag();
+        c.setVisible(true);
+    }//GEN-LAST:event_courseManageActionPerformed
+
+    private void teacherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teacherActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        this.dispose();
+        TeacherDash t=new TeacherDash();
+        t.setVisible(true);
+    }//GEN-LAST:event_teacherActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,15 +181,19 @@ public class AdminDas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem back;
+    private javax.swing.JRadioButtonMenuItem courseManage;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JRadioButtonMenuItem teacher;
     // End of variables declaration//GEN-END:variables
 }

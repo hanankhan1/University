@@ -9,15 +9,15 @@ public class Student {
     private String email;
     private String address;
 
-    public Student() {
-    }
-
     public Student(String sname, String sid, String PhoneNo, String email, String address) {
         this.sname = sname;
         this.sid = sid;
         this.PhoneNo = PhoneNo;
         this.email = email;
         this.address = address;
+    }
+
+    public Student() {
     }
 
     public String getSname() {
@@ -60,5 +60,5 @@ public class Student {
         this.address = address;
     }
     
-    
+
 }

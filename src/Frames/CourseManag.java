@@ -4,6 +4,13 @@
  */
 package Frames;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import subClasses.Course;
+import subClasses.Section;
+import subClasses.Teacher;
+import subClasses.University;
+
 /**
  *
  * @author pc
@@ -17,6 +24,53 @@ public class CourseManag extends javax.swing.JFrame {
         initComponents();
     }
 
+    public void reset() {
+        cCode.setText("");
+        cName.setText("");
+        cRoom.setText("");
+        cSecName.setText("");
+        cTeach.setText("");
+        cday.setText("");
+        ctime.setText("");
+
+    }
+
+    public void setTableValves() {
+        ArrayList<Course> cur = University.getAllCourse();
+
+        if (cur != null) {
+            DefaultTableModel model = (DefaultTableModel) courseList.getModel();
+            model.setRowCount(0);
+            for (int i = 0; i < cur.size(); i++) {
+                Object[] cols = new Object[7];
+                cols[0] = cur.get(i).getcCode();
+                cols[1] = cur.get(i).getcName();
+                cols[2] = cur.get(i).getSect().getTeach().gettName();
+                // cols[3] = sec.get(i).getSecName();
+                // cols[4] = sec.get(i).getSecDay();
+                //cols[5] = sec.get(i).getSecTime();
+                //cols[6] = sec.get(i).getSecRoom();
+                model.addRow(cols);
+            }
+
+        }
+
+    }
+
+    public void singleItemValue(Course c) {
+        DefaultTableModel model = (DefaultTableModel) courseList.getModel();
+        model.setRowCount(0);
+        Object[] cols = new Object[7];
+        cols[0] = c.getcCode();
+        cols[1] = c.getcName();
+        cols[2] = c.getSect().getTeach().gettName();
+        cols[3] = c.getSect().getSecName();
+        cols[4] = c.getSect().getSecDay();
+        cols[5] = c.getSect().getSecTime();
+        cols[6] = c.getSect().getSecRoom();
+        model.addRow(cols);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,107 +82,255 @@ public class CourseManag extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        courseList = new javax.swing.JTable();
+        remove = new javax.swing.JButton();
+        back = new javax.swing.JButton();
+        add = new javax.swing.JButton();
+        search = new javax.swing.JButton();
+        update = new javax.swing.JButton();
+        cCode = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        cName = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        cTeach = new javax.swing.JTextField();
+        cSecName = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        cday = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        cRoom = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        ctime = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        byName = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        courseList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Course Code", "Course Name", "Teacher", "Section Name", "Class Day", "Class Time", "Class Room"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(courseList);
 
-        jTextField1.setText("jTextField1");
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 60, 460, 460));
 
-        jButton1.setText("jButton1");
+        remove.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        remove.setText("Remove");
+        remove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeActionPerformed(evt);
+            }
+        });
+        jPanel1.add(remove, new org.netbeans.lib.awtextra.AbsoluteConstraints(226, 414, -1, 31));
 
-        jButton2.setText("jButton1");
+        back.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        back.setText("Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
+        jPanel1.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 450, -1, 31));
 
-        jButton3.setText("jButton1");
+        add.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        add.setText("Add");
+        add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addActionPerformed(evt);
+            }
+        });
+        jPanel1.add(add, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, 90, 33));
 
-        jButton4.setText("jButton1");
+        search.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        search.setText("Search");
+        search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchActionPerformed(evt);
+            }
+        });
+        jPanel1.add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(226, 478, 100, 29));
 
-        jButton6.setText("jButton1");
+        update.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        update.setText("Update");
+        update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateActionPerformed(evt);
+            }
+        });
+        jPanel1.add(update, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 478, -1, 29));
+        jPanel1.add(cCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, 265, 30));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton3)
-                            .addComponent(jButton6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(92, 92, 92))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(123, 123, 123)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jTextField1))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(40, 40, 40))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE))
-                        .addContainerGap())))
-        );
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Course code");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 113, 30));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Course Name");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 124, 30));
+        jPanel1.add(cName, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 265, 30));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Teacher");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 89, 30));
+        jPanel1.add(cTeach, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 265, 30));
+        jPanel1.add(cSecName, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 265, 30));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Section Name");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 124, 30));
+        jPanel1.add(cday, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 260, 265, 30));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Class Day");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 89, 30));
+        jPanel1.add(cRoom, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 360, 265, 30));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Room");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 124, 30));
+        jPanel1.add(ctime, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, 265, 30));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Class Time");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 124, 30));
+
+        byName.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        byName.setBorder(null);
+        jPanel1.add(byName, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, 460, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 927, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        this.dispose();
+        AdminDas a = new AdminDas();
+        a.setVisible(true);
+    }//GEN-LAST:event_backActionPerformed
+
+    private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
+        // TODO add your handling code her
+        if (!cCode.getText().isEmpty()
+                && !cName.getText().isEmpty()
+                && !cTeach.getText().isEmpty()
+                && !cSecName.getText().isEmpty()
+                && !cday.getText().isEmpty()
+                && !ctime.getText().isEmpty()
+                && !cRoom.getText().isEmpty()) {
+            Course c = new Course();
+            c.setcCode(cCode.getText());
+            c.setcName(cName.getText());
+            if (c.getSect().getTeach().gettName().equalsIgnoreCase(cTeach.getText())) {
+                c.getSect().getTeach().settName(cName.getText());
+            } else {
+                University.showMsgError("Teacher not found..!");
+            }
+            c.getSect().setSecName(cSecName.getText());
+            c.getSect().setSecDay(cday.getText());
+            c.getSect().setSecTime(ctime.getText());
+            c.getSect().setSecRoom(cRoom.getText());
+            University.addCourse(c);
+            setTableValves();
+            reset();
+
+        } else {
+            University.showMsgError("Filled th required filed..!");
+        }
+    }//GEN-LAST:event_addActionPerformed
+
+    private void removeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeActionPerformed
+        // TODO add your handling code here:
+        if (!cCode.getText().isEmpty()
+                && !cName.getText().isEmpty()
+                && !cTeach.getText().isEmpty()
+                && !cSecName.getText().isEmpty()
+                && !cday.getText().isEmpty()
+                && !ctime.getText().isEmpty()
+                && !cRoom.getText().isEmpty()) {
+            Course c = new Course();
+            c.setcCode(cCode.getText());
+            c.setcName(cName.getText());
+            c.getSect().getTeach().settName(cName.getText());
+            c.getSect().setSecName(cSecName.getText());
+            c.getSect().setSecDay(cday.getText());
+            c.getSect().setSecTime(ctime.getText());
+            c.getSect().setSecRoom(cRoom.getText());
+            University.delCourse(c);
+            reset();
+
+        } else {
+            University.showMsgError("Enter the data first");
+        }
+
+    }//GEN-LAST:event_removeActionPerformed
+
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
+        // TODO add your handling code here:
+        if (!byName.getText().isEmpty()) {
+            Course obj = University.csearchByName(byName.getText());
+            if (obj != null) {
+                this.singleItemValue(obj);
+            }
+        } else {
+            University.showMsgError("Enter the name to search..!");
+        }
+    }//GEN-LAST:event_searchActionPerformed
+
+    private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
+        // TODO add your handling code here:
+        if (!cCode.getText().isEmpty()
+                && !cName.getText().isEmpty()
+                && !cTeach.getText().isEmpty()
+                && !cSecName.getText().isEmpty()
+                && !cday.getText().isEmpty()
+                && !ctime.getText().isEmpty()
+                && !cRoom.getText().isEmpty()) {
+            Course c = new Course();
+            c.setcCode(cCode.getText());
+            c.setcName(cName.getText());
+            c.getSect().getTeach().settName(cName.getText());
+            c.getSect().setSecName(cSecName.getText());
+            c.getSect().setSecDay(cday.getText());
+            c.getSect().setSecTime(ctime.getText());
+            c.getSect().setSecRoom(cRoom.getText());
+            University.cupdate(c.getcCode(), c);
+            reset();
+
+        } else {
+            University.showMsgError("Enter the data first");
+        }
+        
+        
+    }//GEN-LAST:event_updateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -166,14 +368,28 @@ public class CourseManag extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JButton add;
+    private javax.swing.JButton back;
+    private javax.swing.JTextField byName;
+    private javax.swing.JTextField cCode;
+    private javax.swing.JTextField cName;
+    private javax.swing.JTextField cRoom;
+    private javax.swing.JTextField cSecName;
+    private javax.swing.JTextField cTeach;
+    private javax.swing.JTextField cday;
+    private javax.swing.JTable courseList;
+    private javax.swing.JTextField ctime;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton remove;
+    private javax.swing.JButton search;
+    private javax.swing.JButton update;
     // End of variables declaration//GEN-END:variables
 }
